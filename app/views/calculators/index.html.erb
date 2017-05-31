@@ -1,0 +1,23 @@
+<% @calculators.each do |calculator| %>
+  <div>
+    <% width = calculator.width %>
+    <table border="1">
+      <thead>
+        <tr>
+          <% width.times do |col| %>
+            <td><%= Calculator::ALPHABET[col] %></td>
+          <% end %>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <% calculator. %>
+          <% width.times do |col| %>
+            <td><%= col %></td>
+          <% end %>
+        </tr>
+      </tbody>
+    </table>
+    <%= calculator.cells %>
+  </div>
+<% end %>

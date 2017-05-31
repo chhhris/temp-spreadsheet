@@ -2,6 +2,8 @@ class Calculator < ApplicationRecord
   validates_presence_of :width, :height
   validates :width, :height, numericality: { only_integer: true }
 
+  serialize :cells, JSON
+
   before_save :convert_cells_to_json
   before_create :create_blank_spreadsheet
 
@@ -28,6 +30,6 @@ class Calculator < ApplicationRecord
       end
     end
 
-    self.cells = spreadsheet_cells.to_json
+    self.cells = spreadsheet_cells
   end
 end

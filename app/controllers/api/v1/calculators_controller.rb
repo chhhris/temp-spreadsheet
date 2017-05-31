@@ -2,6 +2,10 @@ class Api::V1::CalculatorsController < Api::V1::BaseController
 
   def index
     respond_with Calculator.all
+
+    respond_to do |format|
+      format.html { render :index }
+    end
   end
 
   def create
