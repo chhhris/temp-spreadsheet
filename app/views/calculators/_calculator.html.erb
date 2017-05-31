@@ -1,0 +1,33 @@
+<%= form_with(model: calculator, method: :patch) do |f| %>
+  <% calculator_width ||= calculator.width %>
+  <div class="form-group">
+    <table class="table-condensed">
+      <thead>
+        <tr>
+          <td class="table-headers"></td>
+          <% calculator_width.times do |col| %>
+            <td class="table-headers columns-label"><%= Calculator::ALPHABET[col] %></td>
+          <% end %>
+        </tr>
+      </thead>
+      <tbody>
+        <% calculator.cells.values.each_slice(calculator_width).with_index do |row, row_number| %>
+          <tr>
+            <td class="table-headers rows-label"><%= row_number = row_number + 1 %></td>
+            <% row.each_with_index do |value, col_number| %>
+              <% location = [Calculator::ALPHABET[col_number], row_number].join %>
+              <td>
+                <input type="text" name="calculator[cells][<%= location %>]" value="<%= calculator.cells[location] %>">
+              </td>
+            <% end %>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="form-group">
+    <%= f.submit 'Save', class: 'btn btn-default' %>
+    <%= link_to 'New spreadsheet', calculator, method: :delete, data: { confirm: 'This will delete current spreadsheet. Continue?' } %>
+  </div>
+<% end %>

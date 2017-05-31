@@ -9,12 +9,17 @@ class CalculatorsController < ApplicationController
   def update
     @calculator = Calculator.find(params[:id])
     calculations = params[:calculator][:cells]
+    @calculator.update_attribute(:cells, calculations)
 
-    if @calculator.update_attribute(:cells, calculations)
-      redirect_to root_path
-    else
+    if @calculator.errors.present?
       flash[:error] = @calculator.errors.messages[:base]
-      render :show
+    end
+
+    # render json: @calculator
+
+    respond_to do |format|
+      format.js
+      format.json { render json: @calculator, status: :created, location: @calculator }
     end
   end
 
