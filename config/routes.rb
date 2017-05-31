@@ -5,6 +5,7 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :calculators, only: [:index, :create, :destroy, :update]
   root to: 'calculators#index'
   # root to: 'site#index'
 end

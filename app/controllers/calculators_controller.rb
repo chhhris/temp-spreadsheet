@@ -8,10 +8,15 @@ class CalculatorsController < ApplicationController
     end
   end
 
-  private
+  def update
+    calculator = Calculator.find(params[:id])
+    calculations = params[:calculator][:cells]
 
-  def calculator_params
-    params.require(:calculator).permit(:id, :height, :width, :cells)
+    unless calculator.update_attribute(:cells, calculations)
+      flash[:error] = calculator.cells.errors['messages']
+    end
+
+    redirect_to root_path
   end
 
 end

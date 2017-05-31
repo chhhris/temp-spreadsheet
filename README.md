@@ -7,7 +7,7 @@
 
 * System dependencies
 
-* Database `SQLite3`
+* Database ~SQLite3~ POSTGRES
 
 * How to run the test suite
 
@@ -20,3 +20,10 @@
 <!-- Bootstrap -->
 // http://getbootstrap.com/examples/sticky-footer-navbar/
 http://getbootstrap.com/examples/sticky-footer-navbar/
+
+
+- Tried to set it up with React. Got as far as setting up the views and AJAX CRUD actions (check out app/assets/javascripts/components/*) however I discovered my lack of React knowledge (specifically manipulating the data structure to create a complex view whereby the hash was mapped to a table, with the hash values exposed as inputs) was a serious impediment to my ability to finish the assignment on schedule.
+- Backed out of API land, back into Rails view land.
+- Now that I was really in a time crunch, I switched the DB from SQLite to Postgres because I wanted to take advantage Postgres's built-in handling of JSON (rather than manually converting the data into and out of JSON with every GET / PUT).
+
+- Don't like putting an entire table into a form
