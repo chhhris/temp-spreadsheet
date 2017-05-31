@@ -5,6 +5,9 @@ class Api::V1::CalculatorsController < Api::V1::BaseController
   end
 
   def create
+    # calculator = Calculator.new(size: calculator_params[:size])
+    # spreadsheet.save
+
     respond_with :api, :v1, Calculator.create(calculator_params)
   end
 
@@ -21,7 +24,7 @@ class Api::V1::CalculatorsController < Api::V1::BaseController
   private
 
   def calculator_params
-    params.require(:calculator).permit(:id, :cells)
+    params.require(:calculator).permit(:id, :height, :width, :cells)
   end
 
 end

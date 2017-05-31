@@ -10,7 +10,6 @@ var Calculator = React.createClass({
       var calculator = {id: id , cells: cells};
 
       this.props.handleUpdate(calculator);
-      console.log('in handleEdit', this.state.editable, cells);
     }
     this.setState({editable: !this.state.editable})
   },

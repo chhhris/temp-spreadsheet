@@ -10,12 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170529001552) do
+ActiveRecord::Schema.define(version: 20170530183054) do
 
   create_table "calculators", force: :cascade do |t|
     t.string "cells"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "width"
+    t.integer "height"
   end
 
 end
