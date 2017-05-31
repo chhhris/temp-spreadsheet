@@ -6,6 +6,6 @@ Rails.application.routes.draw do
   end
 
   resources :calculators, only: [:index, :create, :destroy, :update]
-  root to: 'calculators#index'
+  root to: 'calculators#show'
   # root to: 'site#index'
 end
