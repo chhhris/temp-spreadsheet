@@ -2,13 +2,15 @@
 
   <!-- errors partial -->
   <% if @calculator.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@calculator.errors.count, "error") %> prohibited this item from being saved:</h2>
-      <ul>
-        <% @calculator.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
+    <div class="has-error">
+      <div class="help-block">
+        <h2><%= pluralize(@calculator.errors.count, "Error") %>:</h2>
+        <ul>
+          <% @calculator.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
     </div>
   <% end %>
 
@@ -16,23 +18,21 @@
   <%= form_for @calculator, method: :patch do |f| %>
 
     <% calculator_width ||= @calculator.width %>
-    <div>
-      <table border="1">
+    <div class="form-group">
+      <table class="table-condensed">
         <thead>
           <tr>
-            <td style="background-color: rgb(188, 188, 188);"></td>
+            <td class="table-headers"></td>
             <% calculator_width.times do |col| %>
-              <td style="background-color: rgb(188, 188, 188);"><%= Calculator::ALPHABET[col] %></td>
+              <td class="table-headers columns-label"><%= Calculator::ALPHABET[col] %></td>
             <% end %>
           </tr>
         </thead>
         <tbody>
 
-
-
             <% @calculator.cells.values.each_slice(calculator_width).with_index do |row, row_number| %>
               <tr>
-                <td style="background-color: rgb(188, 188, 188);"><%= row_number = row_number + 1 %></td>
+                <td class="table-headers rows-label"><%= row_number = row_number + 1 %></td>
                 <% row.each_with_index do |value, col_number| %>
                   <% location = [Calculator::ALPHABET[col_number], row_number].join %>
                   <td>
@@ -46,29 +46,24 @@
       </table>
     </div>
 
-    <div>
-      <%= f.submit 'Save' %>
-      <%= link_to 'New spreadsheet', @calculator, method: :delete, data: { confirm: 'Are you sure?' } %>
+    <div class="form-group">
+      <%= f.submit 'Save', class: 'btn btn-default' %>
+      <%= link_to 'New spreadsheet', @calculator, method: :delete, data: { confirm: 'This will delete current spreadsheet. Continue?' } %>
     </div>
   <% end %>
 
 <% else %>
   <!-- new calculator partial -->
   <h2>New spreadsheet</h2>
-
   <%= form_for Calculator.new, method: :create do |f| %>
-
-    <label for="width">
+    <div class="form-group">
+      <label for="width">Width</label>
       <input type="text" name="width" placeholder="Number of columns">
-    </label>
-
-    <label for="height">
+      <label for="height">Height</label>
       <input type="text" name="height" placeholder="Number of rows">
-    </label>
-
-    <div>
-      <%= f.submit 'Save' %>
+    </div>
+    <div class="form-group">
+      <%= f.submit 'Create', class: 'btn btn-default' %>
     </div>
   <% end %>
-
 <% end %>

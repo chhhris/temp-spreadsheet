@@ -11,6 +11,7 @@ row_size = size.split.first.to_i
 @cells = {}
 
 instructions.each_slice(row_size).with_index do |row, row_number|
+
   row.each_with_index do |value, col_number|
     location = [ALPHABET[col_number], row_number + 1].join
     @cells[location] = value

@@ -10,21 +10,16 @@ class CalculatorsController < ApplicationController
     @calculator = Calculator.find(params[:id])
     calculations = params[:calculator][:cells]
 
-    unless @calculator.update_attribute(:cells, calculations)
-      flash[:error] = @calculator.errors.messages
+    if @calculator.update_attribute(:cells, calculations)
+      redirect_to root_path
+    else
+      flash[:error] = @calculator.errors.messages[:base]
+      render :show
     end
-
-    redirect_to root_path
   end
 
   def create
-    @calculator = Calculator.new(width: params[:width], height: params[:height])
-
-    if @calculator.save
-      flash[:success] = 'New spreadsheet'
-    else
-      flash[:error] = @calculator.errors.messages
-    end
+    Calculator.create(width: params[:width], height: params[:height])
 
     redirect_to root_path
   end

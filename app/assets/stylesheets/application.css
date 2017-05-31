@@ -13,3 +13,20 @@
  *= require_tree .
  *= require_self
  */
+
+.table-headers {
+  background-color: rgb(188, 188, 188);
+}
+
+.columns-label {
+  text-align: center;
+}
+
+.rows-label {
+  width: 20px;
+  text-align: center;
+}
+
+td {
+  padding: 0 !important;
+}
